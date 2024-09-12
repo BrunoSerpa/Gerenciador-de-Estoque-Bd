@@ -1,5 +1,5 @@
 CREATE OR REPLACE FUNCTION deletarMarca()
-RETURNS TRIGGER AS $ $ BEGIN
+RETURNS TRIGGER AS $$ BEGIN
 IF NOT EXISTS (
     SELECT 1 FROM
         Produto
@@ -17,7 +17,7 @@ RETURN OLD;
 
 END;
 
-$ $ LANGUAGE plpgsql;
+$$ LANGUAGE plpgsql;
 
 CREATE TRIGGER deletarMarca
 AFTER

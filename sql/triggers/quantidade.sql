@@ -1,5 +1,5 @@
 CREATE OR REPLACE FUNCTION adicionarItem()
-RETURNS TRIGGER AS $ $ BEGIN
+RETURNS TRIGGER AS $$ BEGIN
 UPDATE
     Produto
 SET
@@ -11,10 +11,10 @@ RETURN NEW;
 
 END;
 
-$ $;
+$$ LANGUAGE plpgsql;;
 
 CREATE OR REPLACE FUNCTION removerItem()
-RETURNS TRIGGER AS $ $ BEGIN
+RETURNS TRIGGER AS $$ BEGIN
 UPDATE
     Produto
 SET
@@ -26,7 +26,7 @@ RETURN OLD;
 
 END;
 
-$ $;
+$$ LANGUAGE plpgsql;;
 
 CREATE TRIGGER incrementarQuantidade
 AFTER

@@ -1,9 +1,9 @@
 CREATE OR REPLACE FUNCTION somaCusto()
-RETURNS TRIGGER AS $ $ BEGIN
+RETURNS TRIGGER AS $$ BEGIN
 UPDATE
     Cadastro
 SET
-     = custo_itens + NEW.preco
+    custo_itens = custo_itens + NEW.preco
 WHERE
     id = NEW.id_cadastro;
 
@@ -11,10 +11,10 @@ RETURN NEW;
 
 END;
 
-$ $;
+$$ LANGUAGE plpgsql;;
 
 CREATE OR REPLACE FUNCTION subtraiCusto()
-RETURNS TRIGGER AS $ $ BEGIN
+RETURNS TRIGGER AS $$ BEGIN
 UPDATE
     Cadastro
 SET
@@ -25,10 +25,10 @@ RETURN OLD;
 
 END;
 
-$ $;
+$$ LANGUAGE plpgsql;;
 
 CREATE OR REPLACE FUNCTION atualizarCusto()
-RETURNS TRIGGER AS $ $ BEGIN
+RETURNS TRIGGER AS $$ BEGIN
 UPDATE
     Cadastro
 SET
@@ -39,19 +39,19 @@ RETURN NEW;
 
 END;
 
-$ $;
+$$ LANGUAGE plpgsql;;
 
 CREATE TRIGGER incrementarTotalCustoCadastro
 AFTER
     INSERT ON Item FOR EACH ROW
-    WHEN (NEW.id_cadastro IS NOT NULL) EXECUTE FUNCTION somaTotal();
+    WHEN (NEW.id_cadastro IS NOT NULL) EXECUTE FUNCTION somaCusto();
 
 CREATE TRIGGER decrementarTotalCustoCadastro
 AFTER
     DELETE ON Item FOR EACH ROW
-    WHEN (OLD.id_cadastro IS NOT NULL) EXECUTE FUNCTION subtraiTotal();
+    WHEN (OLD.id_cadastro IS NOT NULL) EXECUTE FUNCTION subtraiCusto();
 
 CREATE TRIGGER atualizarTotalCustoCadastro
 AFTER
     UPDATE OF preco ON Item FOR EACH ROW
-    WHEN (NEW.id_cadastro IS NOT NULL) EXECUTE FUNCTION atualizarTotal();
+    WHEN (NEW.id_cadastro IS NOT NULL) EXECUTE FUNCTION atualizarCusto();
