@@ -46,5 +46,5 @@ CREATE TABLE Venda (
     frete money NULL,
     titulo varchar(180) NULL,
     custo_itens money NOT NULL,
-    CONSTRAINT Cadastro_pk PRIMARY KEY (id)
+    CONSTRAINT Venda_pk PRIMARY KEY (id)
 );
