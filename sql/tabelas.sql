@@ -11,6 +11,7 @@ CREATE TABLE Item (
     id serial NOT NULL,
     id_cadastro int NOT NULL,
     id_produto int NOT NULL,
+    id_venda int NULL,
     data_compra date NOT NULL,
     preco money NOT NULL,
     CONSTRAINT Item_pk PRIMARY KEY (id)
@@ -37,4 +38,13 @@ CREATE TABLE Produto (
     preco money NOT NULL,
     quantidade int NOT NULL,
     CONSTRAINT Produto_pk PRIMARY KEY (id)
+);
+
+CREATE TABLE Venda (
+    id serial NOT NULL,
+    data_venda timestamp NOT NULL,
+    frete money NULL,
+    titulo varchar(180) NULL,
+    custo_itens money NOT NULL,
+    CONSTRAINT Cadastro_pk PRIMARY KEY (id)
 );
