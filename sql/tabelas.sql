@@ -14,6 +14,7 @@ CREATE TABLE Item (
     id_venda int NULL,
     data_compra date NOT NULL,
     preco money NOT NULL,
+    preco_venda money NULL,
     CONSTRAINT Item_pk PRIMARY KEY (id)
 );
 
